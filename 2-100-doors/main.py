@@ -8,7 +8,11 @@ from door import Door
 #   - count: integer - number of Door instances in the returned list (default=100)
 # Return: List of Door object instances with defined id values
 def generate_doors(count=100):
-    return []
+    doors = []
+    for i in range(count):
+        door = Door(i + 1)
+        doors.append(door)
+    return doors
 
 
 # Does the main 100 logic. Goes through all the Door instances by the rules of 100 Doors
@@ -17,7 +21,10 @@ def generate_doors(count=100):
 #   - doors: list of Door objects
 # Return: list of toggled Door instances
 def toggle_doors(doors):
-    return []
+    for i in range(len(doors)):
+        for j in range(i, len(doors), i + 1):
+            doors[j].toggle()
+    return doors
 
 
 # Colects the ids of the open Doors form the given Door list
@@ -26,7 +33,11 @@ def toggle_doors(doors):
 #   - doors: list of (preferably toggled) Door objects
 # Return: list of open Door ids as strings
 def collect_open_doors(doors):
-    return []
+    open_door_ids = []
+    for door in doors:
+        if door.is_open:
+            open_door_ids.append(str((door.id)))
+    return open_door_ids
 
 
 # Formats a string list into a printable string
@@ -35,7 +46,8 @@ def collect_open_doors(doors):
 #   - open_door_list: list of strings
 # Return: string - comma separated values from the string list
 def format_open_door_names(open_door_ids):
-    return ""
+    return ", ".join(open_door_ids)
+
 
 
 # Main logic of the 100doors example script
